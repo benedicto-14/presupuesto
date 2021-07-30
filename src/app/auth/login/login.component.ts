@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { AppState } from 'src/app/app.reducer';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -8,17 +11,28 @@ import { AuthService } from '../auth.service';
   styles: [
   ]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm:FormGroup;
+  cargando:boolean;
+  subs:Subscription;
 
   constructor(
     private formBuilder:FormBuilder,
-    private authService:AuthService
-    ) { }
+    private authService:AuthService,
+    private store:Store<AppState>
+  ) { }
+  
+    
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.initForm();
+    this.subs = this.store.select('ui').subscribe(state => {
+      this.cargando = state.isLoading;
+    });
   }
 
   initForm():void{
