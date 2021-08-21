@@ -13,6 +13,9 @@ const estadoInicial:AuthState = {
 const reducer = createReducer(estadoInicial,
     on(actionsAuth.SET_USER, (state,{ user })=>{
         return { user: user }
+    }),
+    on(actionsAuth.UN_SET_USER, (state,{ user }) => {
+        return { user: user }
     })
 );
 

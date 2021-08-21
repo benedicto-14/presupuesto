@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { Store } from '@ngrx/store';
 import { ACTIVAR_LOADING,DESACTIVAR_LOADING } from "../shared/ui.actions";
-import { SET_USER } from "./auth.actions";
+import { SET_USER,UN_SET_USER } from "./auth.actions";
 
 import { Observable, Subscription } from 'rxjs';
 import { map } from "rxjs/operators";
@@ -19,6 +19,7 @@ import { AppState } from '../app.reducer';
 export class AuthService {
 
   subscription:Subscription = new Subscription();
+  usuario:User;
 
   constructor(
     private afAuth:AngularFireAuth,
@@ -33,20 +34,17 @@ export class AuthService {
 
       if(fbUser){
         
-        this.subscription = this.afStore.doc(`${fbUser?.uid}/usuario`).valueChanges()
+        this.subscription = this.afStore.doc(`${fbUser.uid}/usuario`).valueChanges()
         .subscribe((userObj:any) => {
-          
-          if(userObj){
-            const nuevoUser = new User(userObj.uid,userObj.nombre,userObj.email);
-            this.store.dispatch(SET_USER({user:nuevoUser}));
-          }
+
+          const nuevoUser = new User(userObj.uid,userObj.nombre,userObj.email);
+          this.store.dispatch(SET_USER({user:nuevoUser}));
+          this.usuario = nuevoUser;
   
         });
 
       }else{
-
         this.subscription.unsubscribe();
-
       }
       
     });
@@ -80,6 +78,10 @@ export class AuthService {
       });
 
     });
+  }
+
+  getUsuario():User{
+    return {...this.usuario};
   }
 
   agregarUsuario(uid:string, nombre:string,email:string){
@@ -117,6 +119,7 @@ export class AuthService {
   logout():void{
     this.ruta.navigate(['/login']);
     this.afAuth.signOut();
+    this.store.dispatch(UN_SET_USER({ user: new User('','','') }));
   }
 
 }

@@ -32,6 +32,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { appReducers } from './app.reducer';
+import { OdernarIngresoEgresoPipe } from './ingreso-egreso/odernar-ingreso-egreso.pipe';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { appReducers } from './app.reducer';
     DetalleComponent,
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    OdernarIngresoEgresoPipe
   ],
   imports: [
     BrowserModule,
