@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { AppState } from 'src/app/app.reducer';
 import { IngresoEgreso } from '../ingreso-egreso.model';
+import { AppStateIE } from '../ingreso-egreso.reducer';
 
 @Component({
   selector: 'app-estadistica',
@@ -20,7 +20,7 @@ export class EstadisticaComponent implements OnInit,OnDestroy {
 
   subscription:Subscription = new Subscription()
 
-  constructor(private store:Store<AppState>) { }
+  constructor(private store:Store<AppStateIE>) { }
   
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { AppState } from 'src/app/app.reducer';
-import { AuthService } from 'src/app/auth/auth.service';
-import { IngresoEgresoService } from 'src/app/ingreso-egreso/ingreso-egreso.service';
+import { AppState } from '../../app.reducer';
+import { AuthService } from '../../auth/auth.service';
+import { IngresoEgresoService } from '../../ingreso-egreso/ingreso-egreso.service';
 
 @Component({
   selector: 'app-sidebar',

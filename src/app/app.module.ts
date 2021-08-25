@@ -3,11 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 //Modulos
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule } from "@angular/forms";
+
+//Modulos creados
+import { AuthModule } from './auth/auth.module';
 
 //Firebase
 import { AngularFireModule } from "@angular/fire";
-import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 //Enviorment
@@ -20,41 +21,19 @@ import { ToastrModule } from 'ngx-toastr';
 //Ngrx Store
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { appReducers } from './app.reducer';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { IngresoEgresoComponent } from './ingreso-egreso/ingreso-egreso.component';
-import { EstadisticaComponent } from './ingreso-egreso/estadistica/estadistica.component';
-import { DetalleComponent } from './ingreso-egreso/detalle/detalle.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { appReducers } from './app.reducer';
-import { OdernarIngresoEgresoPipe } from './ingreso-egreso/odernar-ingreso-egreso.pipe';
-
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    DashboardComponent,
-    IngresoEgresoComponent,
-    EstadisticaComponent,
-    DetalleComponent,
-    FooterComponent,
-    NavbarComponent,
-    SidebarComponent,
-    OdernarIngresoEgresoPipe
+    AppComponent
   ],
   imports: [
     BrowserModule,
+    AuthModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),

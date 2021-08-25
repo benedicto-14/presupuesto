@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { AppState } from 'src/app/app.reducer';
 import { IngresoEgreso } from '../ingreso-egreso.model';
+import { AppStateIE } from '../ingreso-egreso.reducer';
 import { IngresoEgresoService } from '../ingreso-egreso.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class DetalleComponent implements OnInit,OnDestroy {
   items:IngresoEgreso[];
 
   constructor(
-    private store:Store<AppState>,
+    private store:Store<AppStateIE>,
     private service:IngresoEgresoService,
     private toastr: ToastrService
     ) { }
